@@ -1,0 +1,31 @@
+
+
+
+
+  Hero(
+                          tag: 'button',
+                          child: MaterialButton(
+                            onPressed: () {
+                              FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                      email: _EmailController.text,
+                                      password: _passwordController.text)
+                                  .then((FirebaseUser) async {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              }).catchError((e) {
+                                print(e);
+                              });
+                            },
+                            color: Color.fromRGBO(25, 53, 93, 1.0),
+                            minWidth: 50,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              Icons.chevron_right,
+                              size: 30,
+                              color: Color.fromRGBO(253, 194, 35, 1.0),
+                            ),
