@@ -1,18 +1,17 @@
 import 'package:enactus_nca/BottomNavBar.dart';
 import 'package:enactus_nca/bottom_nav/home.dart';
 import 'package:enactus_nca/bottom_nav/notifications.dart';
-import 'package:enactus_nca/services/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:enactus_nca/main.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class sign_in extends StatefulWidget {
+class registration  extends StatefulWidget {
   @override
-  _sign_in createState() => _sign_in();
+  _registration  createState() => _registration();
 }
 
-class _sign_in extends State<sign_in> with SingleTickerProviderStateMixin {
+class _registration  extends State<registration > with SingleTickerProviderStateMixin {
 
   AnimationController controller;
   Animation animation;
@@ -39,8 +38,8 @@ class _sign_in extends State<sign_in> with SingleTickerProviderStateMixin {
   final _auth =FirebaseAuth.instance;
   String email;
   String password;
-  TextEditingController _EmailController = new TextEditingController();
-  TextEditingController _passwordController = new TextEditingController();
+  //TextEditingController _EmailController = new TextEditingController();
+ // TextEditingController _passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,7 +75,10 @@ class _sign_in extends State<sign_in> with SingleTickerProviderStateMixin {
                   padding: const EdgeInsets.all(1.0),
                   width: double.infinity,
                   child: TextField(
-                    controller: _EmailController,
+                    onChanged: (value){
+                      email = value;
+                    },
+                    //controller: _EmailController,
                     scrollPadding: const EdgeInsets.all(30.0),
                     textAlign: TextAlign.start,
                     keyboardType: TextInputType.emailAddress,
@@ -100,7 +102,10 @@ class _sign_in extends State<sign_in> with SingleTickerProviderStateMixin {
                     obscureText: true,
                     cursorColor: Colors.amber,
                     textAlign: TextAlign.start,
-                    controller: _passwordController,
+                     onChanged: (value){
+                      password = value;
+                    },
+                    //controller: _passwordController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(10.0),
                       icon: Icon(Icons.lock),
@@ -110,37 +115,23 @@ class _sign_in extends State<sign_in> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: FlatButton(
-                    child: Text(
-                      "forget password".toUpperCase(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(25, 53, 93, 1.0),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
                 SizedBox(
                   height: 20.0,
                 ),
                 Hero(
                   tag: 'button1',
                    child: MaterialButton(
-                            /*onPressed:() async  {
-                             try{
-                                  final users =await _auth.signInWithEmailAndPassword(email:_EmailController.text, password:_passwordController.text);
-                                  if(users !=null){
-                                     Navigator.of(context).pushReplacementNamed('/home');
+                            onPressed: () async{
+                              try {
+                                   final newUser=await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                                  if(newUser !=null){
+                                    Navigator.of(context).pushReplacementNamed('/home');
                                   }
-                             }catch (e){
-                                  print(e);
-                             }
+                              }catch (e){
+                                print(e);
+                              }
                            
-                            },*/
-                            
+                            },
                             color: Color.fromRGBO(25, 53, 93, 1.0),
                             minWidth: 50,
                             padding: EdgeInsets.symmetric(

@@ -46,6 +46,7 @@ Widget _pagechoser (int page){
 @override
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  static const String id = 'nav';
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
   @override
