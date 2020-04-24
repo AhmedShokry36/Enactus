@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:enactus_nca/BottomNavBar.dart';
+import 'package:enactus_nca/chats/chat.dart';
 import 'package:enactus_nca/bottom_nav/notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ final BottomNavBar  _bottomNavBar = BottomNavBar();
 final home  _home = home();
 final notifications  _notifications = notifications();
 final profile  _profile = profile();
+//final ChatScreen _chatScreen= ChatScreen();
 //final LoginScreen  _profile = LoginScreen();
 Widget _showpage =new home();
 

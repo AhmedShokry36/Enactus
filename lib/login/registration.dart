@@ -38,8 +38,8 @@ class _registration  extends State<registration > with SingleTickerProviderState
   final _auth =FirebaseAuth.instance;
   String email;
   String password;
-  //TextEditingController _EmailController = new TextEditingController();
- // TextEditingController _passwordController = new TextEditingController();
+  TextEditingController _EmailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +57,7 @@ class _registration  extends State<registration > with SingleTickerProviderState
                  Container(
                         margin: const EdgeInsets.only(top: 5.0, bottom: 20.0),
                         child: Text(
-                          "Login".toUpperCase(),
+                          "Sign up".toUpperCase(),
                           style: TextStyle(
                               color:  Color.fromRGBO(25, 53, 93, 1.0),
                               fontSize: 40.0,
@@ -75,15 +75,61 @@ class _registration  extends State<registration > with SingleTickerProviderState
                   padding: const EdgeInsets.all(1.0),
                   width: double.infinity,
                   child: TextField(
-                    onChanged: (value){
+                  /*  onChanged: (value){
                       email = value;
-                    },
-                    //controller: _EmailController,
+                    },*/
+                    controller: _EmailController,
+                    scrollPadding: const EdgeInsets.all(30.0),
+                    textAlign: TextAlign.start,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.info_outline),
+                      contentPadding: const EdgeInsets.all(10.0),
+                      hintText: "ID",
+                      fillColor: Colors.amber.withOpacity(0.7),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                  padding: const EdgeInsets.all(1.0),
+                  width: double.infinity,
+                  child: TextField(
+                  /*  onChanged: (value){
+                      email = value;
+                    },*/
+                    controller: _EmailController,
                     scrollPadding: const EdgeInsets.all(30.0),
                     textAlign: TextAlign.start,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       icon: Icon(Icons.person),
+                      contentPadding: const EdgeInsets.all(10.0),
+                      hintText: "User name",
+                      fillColor: Colors.amber.withOpacity(0.7),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                  padding: const EdgeInsets.all(1.0),
+                  width: double.infinity,
+                  child: TextField(
+                  /*  onChanged: (value){
+                      email = value;
+                    },*/
+                    controller: _EmailController,
+                    scrollPadding: const EdgeInsets.all(30.0),
+                    textAlign: TextAlign.start,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.mail),
                       contentPadding: const EdgeInsets.all(10.0),
                       hintText: "Email",
                       filled: false,
@@ -102,10 +148,10 @@ class _registration  extends State<registration > with SingleTickerProviderState
                     obscureText: true,
                     cursorColor: Colors.amber,
                     textAlign: TextAlign.start,
-                     onChanged: (value){
+                    /* onChanged: (value){
                       password = value;
-                    },
-                    //controller: _passwordController,
+                    },*/
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(10.0),
                       icon: Icon(Icons.lock),
@@ -118,23 +164,52 @@ class _registration  extends State<registration > with SingleTickerProviderState
                 SizedBox(
                   height: 20.0,
                 ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                  padding: const EdgeInsets.all(1.0),
+                  width: double.infinity,
+                  child: TextField(
+                  /*  onChanged: (value){
+                      email = value;
+                    },*/
+                    controller: _EmailController,
+                    scrollPadding: const EdgeInsets.all(30.0),
+                    textAlign: TextAlign.start,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.contact_phone),
+                      contentPadding: const EdgeInsets.all(10.0),
+                      hintText: "number",
+                      filled: false,
+                      fillColor: Colors.amber.withOpacity(0.7),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+          
                 Hero(
                   tag: 'button1',
                    child: MaterialButton(
+                            
                             onPressed: () async{
                               try {
-                                   final newUser=await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                                   final newUser=await _auth.createUserWithEmailAndPassword(email: _EmailController.text, password: _passwordController.text);
                                   if(newUser !=null){
-                                    Navigator.of(context).pushReplacementNamed('/home');
+                                    Navigator.of(context).pushReplacementNamed('/login');
                                   }
                               }catch (e){
                                 print(e);
                               }
                            
                             },
+
                             color: Color.fromRGBO(25, 53, 93, 1.0),
                             minWidth: 50,
+                            
                             padding: EdgeInsets.symmetric(
+                              
                                 vertical: 10, horizontal: 20),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

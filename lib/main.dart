@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Enactus plus',
       theme: ThemeData(),
     
-      home: registration(),
+      home: login(),
       routes: <String,WidgetBuilder>{
         '/ladingpage':(BuildContext context) =>new MyApp(),
         '/home':(BuildContext context) =>new BottomNavBar(),
